@@ -10,13 +10,13 @@ import { ListaDeCompraService } from './service/lista-de-compra.service';
 
 export class AppComponent implements OnInit{
   title = 'app-lista-de-compras';
-  ListaDeCompra! : Array<Item>
+  listaDeCompra! : Array<Item>
 
   constructor(private listaService: ListaDeCompraService) { }
 
   ngOnInit(): void{
-    this.ListaDeCompra = this.listaService.getListaDeCompra();
-    console.log(this.ListaDeCompra);
+    this.listaDeCompra = this.listaService.getListaDeCompra();
+    console.log(this.listaDeCompra);
     
   }
 }
