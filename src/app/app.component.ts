@@ -1,6 +1,7 @@
 import { Item } from './interfaces/iItem';
 import { Component, OnInit } from '@angular/core';
 import { ListaDeCompraService } from './service/lista-de-compra.service';
+import { log } from 'console';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,9 @@ export class AppComponent implements OnInit{
   ngOnInit(): void{
     this.listaDeCompra = this.listaService.getListaDeCompra();
     console.log(this.listaDeCompra);
-    
+  }
+
+  editarItem(item: Item){
+    console.log(item);
   }
 }
