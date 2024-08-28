@@ -12,6 +12,7 @@ import { log } from 'console';
 export class AppComponent implements OnInit{
   title = 'app-lista-de-compras';
   listaDeCompra! : Array<Item>
+  itemParaSerEditado! : Item;
 
   constructor(private listaService: ListaDeCompraService) { }
 
@@ -21,6 +22,6 @@ export class AppComponent implements OnInit{
   }
 
   editarItem(item: Item){
-    console.log(item);
+    this.itemParaSerEditado = item;
   }
 }
