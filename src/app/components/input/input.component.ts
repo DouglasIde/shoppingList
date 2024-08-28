@@ -7,7 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InputComponent implements OnInit {
 
+  valorItem! : string;
+
   constructor() { }
 
   ngOnInit(): void { }
+
+  adicionarItem() {
+    console.log(this.valorItem);
+  }
 }
+
+
