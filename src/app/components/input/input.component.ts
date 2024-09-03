@@ -10,18 +10,14 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 export class InputComponent implements OnInit, OnChanges {
 
   @Input() itemQueVaiSerEditado! : Item;
+  editando = false;
+  textoBtn = 'Salvar item';
 
   valorItem! : string;
 
   constructor(private listaService: ListaDeCompraService) { }
 
   ngOnInit(): void { }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if(changes['itemQueVaiSerEditado'].firstChange){
-      this.valorItem = this.itemQueVaiSerEditado?.nome;
-    }
-  }
 
   adicionarItem() {
     this.listaService.adicionarItemNaLista(this.valorItem);
@@ -30,6 +26,21 @@ export class InputComponent implements OnInit, OnChanges {
 
   limparCampo(){
     this.valorItem = '';
+  }
+
+  editarItem(){
+    this.listaService.editarItemDaLista(this.itemQueVaiSerEditado, this.valorItem);
+    this.limparCampo();
+    this.editando = false;
+    this.textoBtn = "Salvar item";
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['itemQueVaiSerEditado'].firstChange){
+      this.editando = true;
+      this.textoBtn = 'Editar item';
+      this.valorItem = this.itemQueVaiSerEditado?.nome;
+    }
   }
 }
 
