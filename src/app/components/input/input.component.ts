@@ -1,47 +1,52 @@
 import { Item } from 'src/app/interfaces/iItem';
 import { ListaDeCompraService } from './../../service/lista-de-compra.service';
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
-  styleUrls: ['./input.component.css']
+  styleUrls: ['./input.component.css'],
 })
 export class InputComponent implements OnInit, OnChanges {
-
-  @Input() itemQueVaiSerEditado! : Item;
+  @Input() itemQueVaiSerEditado!: Item;
   editando = false;
   textoBtn = 'Salvar item';
+  valorItem!: string;
 
-  valorItem! : string;
+  constructor(private listaService: ListaDeCompraService) {}
 
-  constructor(private listaService: ListaDeCompraService) { }
-
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   adicionarItem() {
     this.listaService.adicionarItemNaLista(this.valorItem);
     this.limparCampo();
   }
 
-  limparCampo(){
+  limparCampo() {
     this.valorItem = '';
   }
 
-  editarItem(){
-    this.listaService.editarItemDaLista(this.itemQueVaiSerEditado, this.valorItem);
+  editarItem() {
+    this.listaService.editarItemDaLista(
+      this.itemQueVaiSerEditado,
+      this.valorItem
+    );
     this.limparCampo();
     this.editando = false;
-    this.textoBtn = "Salvar item";
+    this.textoBtn = 'Salvar item';
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes['itemQueVaiSerEditado'].firstChange){
+    if (changes['itemQueVaiSerEditado'].firstChange) {
       this.editando = true;
       this.textoBtn = 'Editar item';
       this.valorItem = this.itemQueVaiSerEditado?.nome;
     }
   }
 }
-
-
