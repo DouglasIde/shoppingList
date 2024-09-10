@@ -41,7 +41,7 @@ export class AppComponent implements OnInit, DoCheck{
   }
 
   limparLista(){
-
+    this.listaDeCompra = [];
   }
 
   ngDoCheck(): void {
