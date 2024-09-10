@@ -17,7 +17,7 @@ export class AppComponent implements OnInit, DoCheck{
   constructor(private listaService: ListaDeCompraService) { }
 
   ngOnInit(): void{
-    this.listaDeCompra = this.listaService.getListaDeCompra();
+    this.listaDeCompra = this.listaService.getListaDeCompra()|| [];
     console.log(this.listaDeCompra);
   }
 
@@ -25,11 +25,23 @@ export class AppComponent implements OnInit, DoCheck{
     this.itemParaSerEditado = item;
   }
 
-  deletarItem(id: number){
-    const index = this.listaDeCompra.findIndex((item => 
-      item.id === id
-    ));
-      this.listaDeCompra.splice(index, 1);
+  // deletarItem(id: number){
+  //   console.log(typeof id);
+  //   const index = this.listaDeCompra.findIndex((item => 
+  //     item.id === id
+  //   ));
+  //   if (index !== -1){
+  //     this.listaDeCompra.splice(index, 1);
+  //   }
+  // }
+
+  deletarItem(event: any){
+    console.log("Tipo de evento recebido:", typeof event, event);
+    this.deletarItem(event);
+  }
+
+  limparLista(){
+
   }
 
   ngDoCheck(): void {

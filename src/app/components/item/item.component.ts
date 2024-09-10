@@ -12,7 +12,7 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() item!: Item;
   @Output() emitindoItemParaEditar = new EventEmitter();
-  @Output() emitindoItemParaExcluir = new EventEmitter();
+  @Output() emitindoItemParaExcluir = new EventEmitter<Number>();
 
 
   faPen = faPen;
@@ -36,10 +36,15 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  deletarItem(){
-    console.log("Estão tentando me calar!!");
-    this.emitindoItemParaExcluir.emit(this.item.id);
+  deletarItem() {
+    const itemId = Number(this.item.id);
+    if (!isNaN(itemId)) {
+      this.emitindoItemParaExcluir.emit(itemId);  // Certifique-se que está emitindo um número aqui
+    } else {
+      console.error("ID inválido:", this.item.id);
+    }
   }
+  
 
   ngOnDestroy(){
     console.log("Conseguiram me calar!!");
